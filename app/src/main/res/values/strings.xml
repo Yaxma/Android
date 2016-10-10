@@ -1,3 +1,7 @@
 <resources>
     <string name="app_name">XXF</string>
+    <string name="app_home">生活本该如此</string>
+
+    <string name="drawer_joke">轻松时刻</string>
+    <string name="drawer_video">秒拍视频</string>
 </resources>
