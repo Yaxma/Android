@@ -1,4 +1,5 @@
 apply plugin: 'com.android.application'
+apply plugin: 'android-apt'
 
 android {
     compileSdkVersion 24
@@ -23,6 +24,7 @@ dependencies {
     compile fileTree(dir: 'libs', include: ['*.jar'])
     testCompile 'junit:junit:4.12'
     compile 'com.android.support:appcompat-v7:24.2.0'
+    compile 'com.android.support:cardview-v7:24.2.0'
     // RxAndroid
     compile 'io.reactivex:rxjava:1.2.1'
     compile 'io.reactivex:rxandroid:1.2.1'
@@ -32,6 +34,12 @@ dependencies {
     compile 'com.squareup.retrofit2:adapter-rxjava:2.1.0'
     // butter knife
     compile 'com.jakewharton:butterknife:8.4.0'
+    apt 'com.jakewharton:butterknife-compiler:8.4.0'
     // Glide
     compile 'com.github.bumptech.glide:glide:3.7.0'
+    // XRecyclerView
+    compile 'com.jcodecraeer:xrecyclerview:1.2.7'
+    // RecyclerView baseAdapter
+    compile 'com.zhy:base-rvadapter:3.0.3'
+    compile 'com.lorentzos.swipecards:library:1.0.8@aar'
 }
