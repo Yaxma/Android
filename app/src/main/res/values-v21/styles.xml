@@ -1,0 +1,8 @@
+<resources>
+
+    <!-- 透明状态栏样式 -->
+    <style name="Translucent_status" parent="AppTheme">
+        <item name="android:statusBarColor">@color/transparent</item>
+    </style>
+
+</resources>
