@@ -2,7 +2,6 @@ package cn.yaxma.xxf.fragment;
 
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
-import android.util.Log;
 
 import com.jcodecraeer.xrecyclerview.ProgressStyle;
 import com.jcodecraeer.xrecyclerview.XRecyclerView;
@@ -29,11 +28,13 @@ public class JokeFragment extends BaseFragment implements XRecyclerView.LoadingL
 
     @BindView(R.id.recycler_view) XRecyclerView mRecyclerView;
 
-    private List<Joke.ShowapiResBodyBean.ContentlistBean> mJokeList = new ArrayList<>();
+    private List<Joke.ResultBean.DataBean> mJokeList = new ArrayList<>();
 
     private JokeAdapter mAdapter;
 
     private int page = 1;
+    private static final int REFRESH = 0;
+    private static final int LOADMORE = 1;
 
     @Override protected int getContentViewId() {
         return R.layout.fragment_joke;
@@ -49,19 +50,25 @@ public class JokeFragment extends BaseFragment implements XRecyclerView.LoadingL
         mRecyclerView.setLoadingListener(this);
         mAdapter = new JokeAdapter(mContext);
         mRecyclerView.setAdapter(mAdapter);
-        loadJoke();
+        loadJoke(REFRESH);
     }
 
-    private void loadJoke() {
+    private void loadJoke(final int refresh_type) {
+        String time = String.valueOf(System.currentTimeMillis()).toString().substring(0, 10);
         Call<Joke> call = RetrofitWrapper.getInstance().create(APIService.class)
-                .loadJoke(Constant.APIKEY, String.valueOf(page));
+                .loadJoke(Constant.KEY, page, 20, "desc", time);
         call.enqueue(new Callback<Joke>() {
             @Override public void onResponse(Call<Joke> call, Response<Joke> response) {
                 if (response.isSuccessful()) {
                     Joke result = response.body();
                     if (result != null) {
-                        mJokeList = result.getShowapi_res_body().getContentlist();
-                        mAdapter.addAll(mJokeList);
+                        List<Joke.ResultBean.DataBean> list = result.getResult().getData();
+                        if (refresh_type == REFRESH) {
+                            mJokeList = list;
+                        } else {
+                            mJokeList.addAll(list);
+                        }
+                        mAdapter.updateData(mJokeList);
                     }
                 }
                 mRecyclerView.refreshComplete();
@@ -69,18 +76,19 @@ public class JokeFragment extends BaseFragment implements XRecyclerView.LoadingL
             }
 
             @Override public void onFailure(Call<Joke> call, Throwable t) {
-                Log.e("JokeFragment", "onFailure: " + t.toString());
+                mRecyclerView.refreshComplete();
+                mRecyclerView.loadMoreComplete();
             }
         });
     }
 
     @Override public void onRefresh() {
         page = 1;
-        loadJoke();
+        loadJoke(REFRESH);
     }
 
     @Override public void onLoadMore() {
         page += 1;
-        loadJoke();
+        loadJoke(LOADMORE);
     }
 }

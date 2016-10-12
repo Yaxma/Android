@@ -18,19 +18,15 @@ import cn.yaxma.xxf.bean.Joke;
  */
 public class JokeAdapter extends RecyclerView.Adapter<JokeAdapter.ViewHolder> {
 
-    private List<Joke.ShowapiResBodyBean.ContentlistBean> mJokeList;
+    private List<Joke.ResultBean.DataBean> mJokeList;
     private Context mContext;
 
     public JokeAdapter(Context context) {
         mContext = context;
     }
 
-    public void addAll(List<Joke.ShowapiResBodyBean.ContentlistBean> list) {
-        if (mJokeList == null) {
-            mJokeList = list;
-        } else {
-            mJokeList.addAll(list);
-        }
+    public void updateData(List<Joke.ResultBean.DataBean> list) {
+        mJokeList = list;
         notifyDataSetChanged();
     }
 
@@ -39,7 +35,7 @@ public class JokeAdapter extends RecyclerView.Adapter<JokeAdapter.ViewHolder> {
     }
 
     @Override public void onBindViewHolder(ViewHolder holder, int position) {
-        holder.contentTv.setText(Html.fromHtml(mJokeList.get(position).getText()));
+        holder.contentTv.setText(Html.fromHtml(mJokeList.get(position).getContent()));
     }
 
     @Override public int getItemCount() {

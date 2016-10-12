@@ -11,7 +11,9 @@ import retrofit2.http.Query;
  */
 public interface APIService {
 
-    @GET("/showapi_open_bus/showapi_joke/joke_text")
-    Call<Joke> loadJoke(@Header("apikey") String apikey, @Query("page") String page);
+    @GET("/joke/content/list.from")
+    Call<Joke> loadJoke(@Query("key") String key, @Query("page") int page,
+                        @Query("pagesize") int pageSize, @Query("sort") String sort,
+                        @Query("time") String time);
 
 }

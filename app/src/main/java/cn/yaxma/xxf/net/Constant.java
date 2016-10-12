@@ -5,7 +5,7 @@ package cn.yaxma.xxf.net;
  */
 public class Constant {
 
-    public static final String BASEURL = "http://apis.baidu.com";
-    public static final String APIKEY = "4372666e2de07fa8f221c1ca35e0ccc5";
+    public static final String BASEURL = "http://japi.juhe.cn";
+    public static final String KEY = "70b3aa88201b8365fe61746037b56340";
 
 }

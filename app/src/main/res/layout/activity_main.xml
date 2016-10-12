@@ -25,7 +25,7 @@
             android:layout_height="wrap_content"
             android:layout_centerInParent="true"
             android:text="@string/app_home"
-            android:textColor="@color/blue_grey"
+            android:textColor="#4CAF50"
             android:textSize="@dimen/title_size"/>
     </RelativeLayout>
 
@@ -44,7 +44,7 @@
             android:layout_width="240dp"
             android:layout_height="match_parent"
             android:layout_gravity="start"
-            android:background="@color/white"
+            android:background="#B2DFDB"
             android:gravity="center_horizontal"
             android:orientation="vertical">
 
