@@ -67,6 +67,10 @@ public class MainActivity extends BaseActivity {
         }
     }
 
+    @OnClick(R.id.left_drawer) void leftDrawerClick(){
+        //不处理，消费滑动事件
+    }
+
     private void switchFragment(Fragment toFragment, String tag) {
         FragmentTransaction fg = mFragmentManager.beginTransaction();
         if (toFragment.isAdded()) {
@@ -86,10 +90,5 @@ public class MainActivity extends BaseActivity {
         if (drawerLayout != null && drawerLayout.isDrawerOpen(GravityCompat.START)) {
             drawerLayout.closeDrawers();
         }
-    }
-
-    @Override protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        ButterKnife.bind(this);
     }
 }
